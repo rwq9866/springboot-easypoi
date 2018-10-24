@@ -26,4 +26,9 @@ public class EasypoiServiceImpl implements EasypoiService {
     public List<Student> findeasypoi() {
         return easypoiRepository.findAll();
     }
+
+    @Override
+    public List<Student> findAll() {
+        return easypoiRepository.findAll();
+    }
 }

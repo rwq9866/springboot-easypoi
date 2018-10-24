@@ -1,8 +1,10 @@
 $(function () {
     loadIndex();
     $("#addeasypoi").click(addeasypoi);
+    $("#exportstudent").click(exportstudent);
 });
 
+// 打开页面时加载表格数据
 function loadIndex() {
     $.getJSON(
         "loadeasypoi",
@@ -59,6 +61,7 @@ var tdtemplate1 =
     '</td>' +
     '</tr>'
 
+// 添加表格数据
 function addeasypoi() {
     var url = "/addeasypoi";
     var data = {
@@ -80,5 +83,12 @@ function addeasypoi() {
                 });
             });
         }
+    }
+}
+
+// 导出表格数据
+function exportstudent() {
+    if(confirm("确定要导出全部数据?")){
+        window.location.href="/exportstudent";
     }
 }

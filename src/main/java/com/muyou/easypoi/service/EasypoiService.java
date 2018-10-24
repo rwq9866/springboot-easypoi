@@ -9,4 +9,6 @@ public interface EasypoiService {
     void addep(Student student);
 
     List<Student> findeasypoi();
+
+    List<Student> findAll();
 }
