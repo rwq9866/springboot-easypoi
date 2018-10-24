@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>easypoi</title>
+    <link rel="stylesheet" th:href = "@{css/bootstrap.css}">
+    <link rel="stylesheet" th:href = "@{css/easypoi.css}">
+    <script type="text/javascript" th:src = "@{js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" th:src = "@{js/easypoi.js}"></script>
+    <script type="text/javascript" th:src = "@{js/bootstrap.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <p id="tou">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
+            </p>
+        </div>
+        <div class="row">
+            <table class="table  table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>薪资</th>
+                    <th>家庭住址</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="tdata">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 添加(模态框)（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加学生信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p>姓&nbsp;&nbsp;名&nbsp;:&nbsp;<input type="text" id="name" placeholder="请输入你的姓名..."/></p>
+                    <p>年&nbsp;&nbsp;龄&nbsp;:&nbsp;<input type="number" id="age" placeholder="请输入你的年龄..." max="200"/></p>
+                    <p>性&nbsp;&nbsp;别&nbsp;:
+                        <input type="radio" name="sex" value="男" checked="checked"/>男
+                        <input type="radio" name="sex" value="女"/>女
+                    </p>
+                    <p>薪&nbsp;&nbsp;资&nbsp;:&nbsp;<input type="number" id="salary" placeholder="请输入你的薪资..."/></p>
+                    <p>家庭住址:&nbsp;<input type="text" id="address" placeholder="请输入你的家庭住址..."/></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="addeasypoi">
+                        提交
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal -->
+</body>
+</html>

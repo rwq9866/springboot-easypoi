@@ -1,0 +1,12 @@
+td,th{
+    text-align: center;
+}
+
+#tou{
+    border: 1px solid #666666;
+    padding:10px 40px;
+    background: #fff;
+    border-radius:10px;
+
+    margin-top: 150px;
+}
