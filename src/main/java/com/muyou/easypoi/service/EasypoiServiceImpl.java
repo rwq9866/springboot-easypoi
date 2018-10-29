@@ -2,6 +2,8 @@ package com.muyou.easypoi.service;
 
 import com.muyou.easypoi.domain.EasypoiRepository;
 import com.muyou.easypoi.domain.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,5 +32,20 @@ public class EasypoiServiceImpl implements EasypoiService {
     @Override
     public List<Student> findAll() {
         return easypoiRepository.findAll();
+    }
+
+    @Override
+    public void deletestu(String id) {
+        easypoiRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveAll(List<Student> list) {
+        easypoiRepository.saveAll(list);
+    }
+
+    @Override
+    public Page<Student> findAll(Pageable pageable) {
+        return easypoiRepository.findAll(pageable);
     }
 }

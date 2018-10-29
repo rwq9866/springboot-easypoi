@@ -15,6 +15,7 @@
             <p id="tou">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
                 <button type="button" class="btn btn-primary" id="exportstudent">导出</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">导入</button>
             </p>
         </div>
         <div class="row">
@@ -34,6 +35,13 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="row">
+            <ul class="pager">
+                <li class="previous"><button type="button" id="previous">&larr; Older</button></li>
+                <li>共<input id="pagenum"/>页</li>
+                <li class="next"><button type="button" id="next">Newer &rarr;</button></li>
+            </ul>
         </div>
     </div>
     <!-- 添加(模态框)（Modal） -->
@@ -64,6 +72,34 @@
                     </button>
                     <button type="button" class="btn btn-primary" id="addeasypoi">
                         提交
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal -->
+
+    <!-- 导入(模态框)（Modal） -->
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="importModalLabel">
+                        导入学生信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input type="file" id="file">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="importstudent">
+                        导入
                     </button>
                 </div>
             </div><!-- /.modal-content -->

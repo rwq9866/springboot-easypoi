@@ -21,7 +21,7 @@ public class Student implements Serializable{
     @Excel(name = "年龄", orderNum = "2",isImportField = "age")
     private int age;
     @Excel(name = "性别", orderNum = "3",isImportField = "gender")
-    private char gender;
+    private String gender;
     @Excel(name = "薪资", orderNum = "4",isImportField = "salary")
     private double salary;
     @Excel(name = "家庭住址",width = 30,orderNum = "5", isImportField = "address")
@@ -32,7 +32,7 @@ public class Student implements Serializable{
     public Student() {
     }
 
-    public Student(String name, int age, char gender, double salary, String address, String createtime) {
+    public Student(String name, int age, String gender, double salary, String address, String createtime) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -65,11 +65,11 @@ public class Student implements Serializable{
         this.age = age;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
