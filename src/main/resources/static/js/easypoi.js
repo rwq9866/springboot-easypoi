@@ -1,5 +1,4 @@
 $(function () {
-    // loadIndex();
     loadIndexpage();
     $("#addeasypoi").click(addeasypoi);
     $("#exportstudent").click(exportstudent);
@@ -8,45 +7,9 @@ $(function () {
     $("#next").click(nextdemo);
 });
 
-function previousdemo() {
-    if(pageNo > 1) pageNo -= 1;
-    var data = {pageNo:pageNo,pageSize:pageSize};
-    $.post(
-        "loadeasypoipage",
-        data,
-        function (result) {
-            $("#pagenum").val(result.pagenum);
-            showTable(result.list);
-        }
-    );
-}
-
-function nextdemo() {
-    if(pageNo < pagenum) pageNo += 1;
-    var data = {pageNo:pageNo,pageSize:pageSize};
-    $.post(
-        "loadeasypoipage",
-        data,
-        function (result) {
-            $("#pagenum").val(result.pagenum);
-            showTable(result.list);
-        }
-    );
-}
-
-// 打开页面时加载表格数据
-function loadIndex() {
-    $.getJSON(
-        "loadeasypoi",
-        function (result) {
-            showTable(result);
-        }
-    );
-}
-
 var pageNo = 1;
-var pageSize = 5;
-var pagenum = 0;
+var pageSize = 6;
+var totalPages = 0;
 // 打开页面时分页加载表格数据
 function loadIndexpage() {
     var data = {pageNo:pageNo,pageSize:pageSize};
@@ -54,8 +17,7 @@ function loadIndexpage() {
         "loadeasypoipage",
         data,
         function (result) {
-            $("#pagenum").val(result.pagenum);
-            pagenum = result.pagenum;
+            pages(result);
             showTable(result.list);
         }
     );
@@ -129,6 +91,7 @@ function addeasypoi() {
             $('#myModal').on('hidden.bs.modal', function () {
                 $.post(url,data,function(result){
                     alert("添加成功!!!");
+                    // loadIndexpage();
                     window.location.reload();
                 });
             });
@@ -162,7 +125,8 @@ function importstudent() {
         processData: false,
         success:function(data){
             alert("导入成功!!!");
-            window.location.reload();
+            loadIndexpage();
+            // window.location.reload();
         }
     });
 }
@@ -171,12 +135,47 @@ function importstudent() {
 function deletestudent(id) {
     if(confirm("确定要删除此学生信息???")){
         $.post("deletestudent", {id:id}, function (result) {
-                alert("删除成功!!!");
-                window.location.reload();});
+            alert("删除成功!!!");
+            loadIndexpage();
+            // window.location.reload();
+            });
     }
 }
 
 // 修改
 function modifystudent(student) {
     alert(student.name);
+}
+
+function previousdemo() {
+    if(pageNo > 1) pageNo -= 1;
+    var data = {pageNo:pageNo,pageSize:pageSize};
+    $.post(
+        "loadeasypoipage",
+        data,
+        function (result) {
+            pages(result);
+            showTable(result.list);
+        }
+    );
+}
+
+function nextdemo() {
+    if(pageNo < totalPages) pageNo += 1;
+    var data = {pageNo:pageNo,pageSize:pageSize};
+    $.post(
+        "loadeasypoipage",
+        data,
+        function (result) {
+            pages(result);
+            showTable(result.list);
+        }
+    );
+}
+
+function pages(result) {
+    $("#pageNumber").val(result.pageNumber);
+    $("#totalPages").val(result.totalPages);
+    $("#totalElements").val(result.totalElements);
+    totalPages = result.totalPages;
 }

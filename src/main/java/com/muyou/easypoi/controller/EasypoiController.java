@@ -56,15 +56,11 @@ public class EasypoiController {
     public Map<String,Object> loadeasypoipage(String pageNo,String pageSize){
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNo) - 1,Integer.parseInt(pageSize));
         Page<Student> pages = easypoiService.findAll(pageable);
-        List<Student> list = new ArrayList<>();
-        for(Student s : pages){
-            list.add(s);
-        }
         Map<String,Object> map = new HashMap<>();
-        map.put("pagenum",pages.getTotalPages());
-        map.put("list",list);
-        System.out.println(pages.getTotalElements());
-        System.out.println(pages.getTotalPages());
+        map.put("pageNumber",pages.getNumber() + 1); // 当前页数
+        map.put("totalPages",pages.getTotalPages()); // 总页数
+        map.put("totalElements",pages.getTotalElements()); // 数据总数
+        map.put("list",pages.getContent());
         return map;
     }
 

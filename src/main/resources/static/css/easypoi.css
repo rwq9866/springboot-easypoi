@@ -15,3 +15,9 @@ td,th{
 
     margin-top: 150px;
 }
+
+.pagesInput{
+    text-align: center;
+    width: 20px;
+    border: 0px;
+}
