@@ -38,6 +38,11 @@ public class StudentEntity implements Serializable {
     @Excel(name = "进校日期", databaseFormat = "yyyyMMddHHmmss", format = "yyyy-MM-dd")
     private Date registrationDate;
 
+    // 照片
+    @Column(name = "photo", length = 100)
+    @Excel(name = "照片", type = 2 ,width = 20 , height = 20,imageType = 1)
+    private String photo;
+
     // 课程
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
@@ -93,5 +98,13 @@ public class StudentEntity implements Serializable {
 
     public void setCourse(CourseEntity course) {
         this.course = course;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
