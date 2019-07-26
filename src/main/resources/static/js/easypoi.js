@@ -5,6 +5,7 @@ $(function () {
     $("#importstudent").click(importstudent);
     $("#previous").click(previousdemo);
     $("#next").click(nextdemo);
+    $("#dc").click(dc);
 });
 
 var pageNo = 1;
@@ -108,6 +109,7 @@ function exportstudent() {
 
 // 导入
 function importstudent() {
+    $('#importModal').modal('hide');
     var formData = new FormData();
     formData.append("file",$("#file")[0].files[0]);
     $.ajax({
@@ -178,4 +180,11 @@ function pages(result) {
     $("#totalPages").val(result.totalPages);
     $("#totalElements").val(result.totalElements);
     totalPages = result.totalPages;
+}
+
+
+function dc() {
+    if(confirm("确定要导出测试数据吗?")){
+        window.location.href="/dc";
+    }
 }

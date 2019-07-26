@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
+import com.muyou.easypoi.domain.CourseEntity;
 import com.muyou.easypoi.domain.Student;
 import com.muyou.easypoi.service.EasypoiService;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -99,31 +100,31 @@ public class EasypoiController {
 
     // 大数据导出全部数据
     // @RequestMapping("downloadExcel")
-    public void bigDataExport(HttpServletResponse res) throws Exception {
-        long t1 = System.currentTimeMillis();
-        // 默认的为application/json,而谷歌浏览器所期望的值应该是text/html
-        res.setHeader("Content-type", "text/html");
-        // 设置响应头 设置 导出的表的名称
-        res.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("学生信息表", "utf-8") + ".xlsx");
-        // 设置响应数据编码格式
-        res.setCharacterEncoding("utf-8");
-        List<Student> list1 = new ArrayList<Student>();
-        Workbook workbook = null;
-        ExportParams params = new ExportParams("大数据测试-学生个人信息表", "信息表");
-        List<Student> list = easypoiService.findAll();
-        int listSize = list.size();
-        int num = listSize / 10000;
-        for (Student t : list) {
-            list1.add(t);
-            if (list1.size() % 10000 == 0 || (num == 0 && list1.size() == listSize % 10000)) {
-                num--;
-                workbook = ExcelExportUtil.exportBigExcel(params, Student.class, list1);
-                list1.clear();
-            }
-        }
-        ExcelExportUtil.closeExportBigExcel();
-        workbook.write(res.getOutputStream());
-    }
+//    public void bigDataExport(HttpServletResponse res) throws Exception {
+//        long t1 = System.currentTimeMillis();
+//        // 默认的为application/json,而谷歌浏览器所期望的值应该是text/html
+//        res.setHeader("Content-type", "text/html");
+//        // 设置响应头 设置 导出的表的名称
+//        res.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("学生信息表", "utf-8") + ".xlsx");
+//        // 设置响应数据编码格式
+//        res.setCharacterEncoding("utf-8");
+//        List<Student> list1 = new ArrayList<Student>();
+//        Workbook workbook = null;
+//        ExportParams params = new ExportParams("大数据测试-学生个人信息表", "信息表");
+//        List<Student> list = easypoiService.findAll();
+//        int listSize = list.size();
+//        int num = listSize / 10000;
+//        for (Student t : list) {
+//            list1.add(t);
+//            if (list1.size() % 10000 == 0 || (num == 0 && list1.size() == listSize % 10000)) {
+//                num--;
+//                workbook = ExcelExportUtil.exportBigExcel(params, Student.class, list1);
+//                list1.clear();
+//            }
+//        }
+//        ExcelExportUtil.closeExportBigExcel();
+//        workbook.write(res.getOutputStream());
+//    }
 
     // 上传文件的保存
     public static void uploadFile(byte[] file, String filePath, String fileName) throws Exception {
@@ -135,5 +136,28 @@ public class EasypoiController {
         out.write(file);
         out.flush();
         out.close();
+    }
+
+    public String zhongwen(String name){
+        String asciiDemo = "";
+        for(int i = 0;i < name.length();i++){
+            asciiDemo += (int)(name.charAt(i));
+            if(i != name.length() - 1) asciiDemo += " ";
+        }
+        return asciiDemo;
+    }
+
+    // 导出全部学生数据
+    @RequestMapping("dc")
+    public void dc(HttpServletResponse res) throws IOException {
+        // 默认的为application/json,而谷歌浏览器所期望的值应该是text/html
+        res.setHeader("Content-type", "text/html");
+        // 设置响应头 设置 导出的表的名称
+        res.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("测试信息表", "utf-8") + ".xlsx");
+        // 设置响应数据编码格式
+        res.setCharacterEncoding("utf-8");
+        List<CourseEntity> courseEntitys = easypoiService.findCourses();
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("学生基本信息", "学生"), CourseEntity.class, courseEntitys);
+        workbook.write(res.getOutputStream());
     }
 }

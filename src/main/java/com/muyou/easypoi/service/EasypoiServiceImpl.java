@@ -1,5 +1,7 @@
 package com.muyou.easypoi.service;
 
+import com.muyou.easypoi.domain.CourseEntity;
+import com.muyou.easypoi.domain.CourseRepository;
 import com.muyou.easypoi.domain.EasypoiRepository;
 import com.muyou.easypoi.domain.Student;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,9 @@ public class EasypoiServiceImpl implements EasypoiService {
 
     @Resource
     private EasypoiRepository easypoiRepository;
+
+    @Resource
+    private CourseRepository courseRepository;
 
     @Override
     public void addep(Student student) {
@@ -47,5 +52,10 @@ public class EasypoiServiceImpl implements EasypoiService {
     @Override
     public Page<Student> findAll(Pageable pageable) {
         return easypoiRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<CourseEntity> findCourses() {
+        return courseRepository.findAll();
     }
 }

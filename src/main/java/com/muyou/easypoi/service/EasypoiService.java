@@ -1,5 +1,6 @@
 package com.muyou.easypoi.service;
 
+import com.muyou.easypoi.domain.CourseEntity;
 import com.muyou.easypoi.domain.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,6 @@ public interface EasypoiService {
     void saveAll(List<Student> list);
 
     Page<Student> findAll(Pageable pageable);
+
+    List<CourseEntity> findCourses();
 }
