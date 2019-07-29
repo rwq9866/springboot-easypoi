@@ -147,7 +147,7 @@ public class EasypoiController {
         return asciiDemo;
     }
 
-    // 导出全部学生数据
+    // 导出课程的详细信息
     @RequestMapping("dc")
     public void dc(HttpServletResponse res) throws IOException {
         // 默认的为application/json,而谷歌浏览器所期望的值应该是text/html
